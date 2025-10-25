@@ -1,0 +1,468 @@
+---
+title: "Le Model Context Protocol (MCP) : Révolutionnez l'intégration de vos outils IA"
+publishedAt: "2025-10-25"
+image: "/images/mcp-cover.jpg"
+summary: "Découvrez le Model Context Protocol, le standard universel qui simplifie l'intégration des outils et données avec les modèles d'IA comme Claude."
+tag: "IA & Développement"
+---
+
+## Qu'est-ce que le Model Context Protocol ?
+
+Le Model Context Protocol (MCP) est un protocole ouvert développé par Anthropic qui standardise la façon dont les applications communiquent avec les modèles d'IA comme Claude. Pensez-y comme **USB pour l'IA** - un standard universel qui permet aux outils, données et services de se connecter facilement aux assistants IA.
+
+Avant MCP, chaque intégration nécessitait un développement personnalisé. Vous vouliez connecter votre base de données ? Code custom. Votre CRM ? Encore du code custom. MCP change cela radicalement.
+
+## Architecture de base
+
+MCP suit une architecture client-serveur simple mais puissante :
+
+- **Client MCP** : L'application hôte (comme Claude Desktop) qui se connecte aux serveurs
+- **Serveur MCP** : Un service qui expose des ressources, outils ou prompts spécifiques
+- **Protocole** : La couche de communication standardisée entre les deux
+
+<CodeBlock
+    marginBottom="16"
+    codes={[
+      {
+        code:
+`// Structure d'un message MCP simple
+{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "get_user_data",
+    "arguments": {
+      "user_id": "12345"
+    }
+  },
+  "id": 1
+}`,
+        language: "json",
+        label: "message-mcp.json"
+      }
+    ]}
+/>
+
+## Créer votre premier serveur MCP
+
+Voici un exemple simple d'un serveur MCP en Node.js qui expose un outil de gestion de tâches :
+
+<CodeBlock
+    marginBottom="16"
+    codes={[
+      {
+        code:
+`import { Server } from "@modelcontextprotocol/sdk/server/index.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import {
+  CallToolRequestSchema,
+  ListToolsRequestSchema,
+} from "@modelcontextprotocol/sdk/types.js";
+
+// Stockage en mémoire des tâches
+const tasks = new Map();
+
+// Créer le serveur
+const server = new Server(
+  {
+    name: "task-manager",
+    version: "1.0.0",
+  },
+  {
+    capabilities: {
+      tools: {},
+    },
+  }
+);
+
+// Définir les outils disponibles
+server.setRequestHandler(ListToolsRequestSchema, async () => {
+  return {
+    tools: [
+      {
+        name: "add_task",
+        description: "Ajouter une nouvelle tâche",
+        inputSchema: {
+          type: "object",
+          properties: {
+            title: {
+              type: "string",
+              description: "Le titre de la tâche",
+            },
+            priority: {
+              type: "string",
+              enum: ["low", "medium", "high"],
+              description: "La priorité de la tâche",
+            },
+          },
+          required: ["title"],
+        },
+      },
+      {
+        name: "list_tasks",
+        description: "Lister toutes les tâches",
+        inputSchema: {
+          type: "object",
+          properties: {},
+        },
+      },
+    ],
+  };
+});
+
+// Gérer les appels d'outils
+server.setRequestHandler(CallToolRequestSchema, async (request) => {
+  const { name, arguments: args } = request.params;
+
+  if (name === "add_task") {
+    const taskId = Date.now().toString();
+    const task = {
+      id: taskId,
+      title: args.title,
+      priority: args.priority || "medium",
+      completed: false,
+      createdAt: new Date().toISOString(),
+    };
+    
+    tasks.set(taskId, task);
+    
+    return {
+      content: [
+        {
+          type: "text",
+          text: \`Tâche créée avec succès : \${JSON.stringify(task, null, 2)}\`,
+        },
+      ],
+    };
+  }
+
+  if (name === "list_tasks") {
+    const taskList = Array.from(tasks.values());
+    
+    return {
+      content: [
+        {
+          type: "text",
+          text: \`Tâches (\${taskList.length}) :\\n\${JSON.stringify(taskList, null, 2)}\`,
+        },
+      ],
+    };
+  }
+
+  throw new Error(\`Outil inconnu : \${name}\`);
+});
+
+// Démarrer le serveur
+async function main() {
+  const transport = new StdioServerTransport();
+  await server.connect(transport);
+  console.error("Serveur MCP de gestion de tâches démarré");
+}
+
+main().catch(console.error);`,
+        language: "typescript",
+        label: "server.ts"
+      }
+    ]}
+/>
+
+## Configuration du client
+
+Pour utiliser ce serveur avec Claude Desktop, ajoutez cette configuration :
+
+<CodeBlock
+    marginBottom="16"
+    codes={[
+      {
+        code:
+`{
+  "mcpServers": {
+    "task-manager": {
+      "command": "node",
+      "args": ["/chemin/vers/votre/server.js"]
+    }
+  }
+}`,
+        language: "json",
+        label: "claude_desktop_config.json"
+      }
+    ]}
+/>
+
+## Exemple avec ressources
+
+Les serveurs MCP peuvent également exposer des ressources (fichiers, données) :
+
+<CodeBlock
+    marginBottom="16"
+    codes={[
+      {
+        code:
+`import { Server } from "@modelcontextprotocol/sdk/server/index.js";
+import {
+  ListResourcesRequestSchema,
+  ReadResourceRequestSchema,
+} from "@modelcontextprotocol/sdk/types.js";
+import fs from "fs/promises";
+import path from "path";
+
+const server = new Server(
+  {
+    name: "documentation-server",
+    version: "1.0.0",
+  },
+  {
+    capabilities: {
+      resources: {},
+    },
+  }
+);
+
+const DOCS_DIR = "./docs";
+
+// Lister les ressources disponibles
+server.setRequestHandler(ListResourcesRequestSchema, async () => {
+  const files = await fs.readdir(DOCS_DIR);
+  
+  return {
+    resources: files.map((file) => ({
+      uri: \`file://\${path.join(DOCS_DIR, file)}\`,
+      name: file,
+      mimeType: "text/plain",
+      description: \`Documentation : \${file}\`,
+    })),
+  };
+});
+
+// Lire une ressource spécifique
+server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
+  const { uri } = request.params;
+  const filePath = uri.replace("file://", "");
+  
+  const content = await fs.readFile(filePath, "utf-8");
+  
+  return {
+    contents: [
+      {
+        uri,
+        mimeType: "text/plain",
+        text: content,
+      },
+    ],
+  };
+});`,
+        language: "typescript",
+        label: "docs-server.ts"
+      }
+    ]}
+/>
+
+## Cas d'usage pratiques
+
+### 1. Intégration avec une base de données
+
+<CodeBlock
+    marginBottom="16"
+    codes={[
+      {
+        code:
+`// Serveur MCP pour PostgreSQL
+server.setRequestHandler(CallToolRequestSchema, async (request) => {
+  const { name, arguments: args } = request.params;
+
+  if (name === "query_database") {
+    const client = await pool.connect();
+    try {
+      const result = await client.query(args.query, args.params || []);
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify(result.rows, null, 2),
+          },
+        ],
+      };
+    } finally {
+      client.release();
+    }
+  }
+});`,
+        language: "typescript",
+        label: "database-server.ts"
+      }
+    ]}
+/>
+
+### 2. Connexion à une API externe
+
+<CodeBlock
+    marginBottom="16"
+    codes={[
+      {
+        code:
+`// Serveur MCP pour GitHub
+server.setRequestHandler(CallToolRequestSchema, async (request) => {
+  const { name, arguments: args } = request.params;
+
+  if (name === "create_github_issue") {
+    const response = await fetch(
+      \`https://api.github.com/repos/\${args.owner}/\${args.repo}/issues\`,
+      {
+        method: "POST",
+        headers: {
+          "Authorization": \`token \${process.env.GITHUB_TOKEN}\`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: args.title,
+          body: args.description,
+          labels: args.labels || [],
+        }),
+      }
+    );
+
+    const issue = await response.json();
+    
+    return {
+      content: [
+        {
+          type: "text",
+          text: \`Issue créée : \${issue.html_url}\`,
+        },
+      ],
+    };
+  }
+});`,
+        language: "typescript",
+        label: "github-server.ts"
+      }
+    ]}
+/>
+
+## Bonnes pratiques
+
+### Gestion des erreurs robuste
+
+Toujours implémenter une gestion d'erreurs appropriée :
+
+<CodeBlock
+    marginBottom="16"
+    codes={[
+      {
+        code:
+`server.setRequestHandler(CallToolRequestSchema, async (request) => {
+  try {
+    const { name, arguments: args } = request.params;
+    
+    // Validation des arguments
+    if (!args.requiredField) {
+      throw new Error("Le champ 'requiredField' est obligatoire");
+    }
+    
+    // Logique de l'outil
+    const result = await performOperation(args);
+    
+    return {
+      content: [
+        {
+          type: "text",
+          text: JSON.stringify(result, null, 2),
+        },
+      ],
+    };
+  } catch (error) {
+    return {
+      content: [
+        {
+          type: "text",
+          text: \`Erreur : \${error.message}\`,
+        },
+      ],
+      isError: true,
+    };
+  }
+});`,
+        language: "typescript",
+        label: "error-handling.ts"
+      }
+    ]}
+/>
+
+### Logging et monitoring
+
+<CodeBlock
+    marginBottom="16"
+    codes={[
+      {
+        code:
+`import { Server } from "@modelcontextprotocol/sdk/server/index.js";
+
+const server = new Server(
+  { name: "my-server", version: "1.0.0" },
+  { capabilities: { tools: {} } }
+);
+
+// Logger toutes les requêtes
+server.setRequestHandler(CallToolRequestSchema, async (request) => {
+  const startTime = Date.now();
+  console.log(\`[\${new Date().toISOString()}] Appel : \${request.params.name}\`);
+  
+  try {
+    const result = await handleTool(request);
+    const duration = Date.now() - startTime;
+    console.log(\`[\${new Date().toISOString()}] Succès en \${duration}ms\`);
+    return result;
+  } catch (error) {
+    const duration = Date.now() - startTime;
+    console.error(\`[\${new Date().toISOString()}] Erreur après \${duration}ms:\`, error);
+    throw error;
+  }
+});`,
+        language: "typescript",
+        label: "logging.ts"
+      }
+    ]}
+/>
+
+## Installation et démarrage rapide
+
+Pour commencer avec MCP, installez le SDK :
+
+<CodeBlock
+    marginBottom="16"
+    codes={[
+      {
+        code:
+`# Installer le SDK MCP
+npm install @modelcontextprotocol/sdk
+
+# Créer un nouveau projet
+mkdir mon-serveur-mcp
+cd mon-serveur-mcp
+npm init -y
+
+# Installer les dépendances
+npm install @modelcontextprotocol/sdk
+
+# Créer votre serveur
+touch server.ts`,
+        language: "bash",
+        label: "terminal"
+      }
+    ]}
+/>
+
+## Ressources utiles
+
+- **Documentation officielle** : [modelcontextprotocol.io](https://modelcontextprotocol.io)
+- **SDK GitHub** : [github.com/anthropics/mcp](https://github.com/anthropics/mcp)
+- **Exemples de serveurs** : Explorez les serveurs communautaires pour vous inspirer
+- **Claude Desktop** : Testez vos serveurs directement avec Claude
+
+## Conclusion
+
+Le Model Context Protocol simplifie radicalement l'intégration d'outils et de données avec les modèles d'IA. En adoptant ce standard ouvert, vous créez des intégrations réutilisables, maintenables et partageables avec toute la communauté.
+
+Commencez petit avec un serveur simple, puis étendez progressivement vos capacités. L'écosystème MCP ne fait que commencer, et c'est le moment idéal pour en faire partie.
+
+Bon développement ! �

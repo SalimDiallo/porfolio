@@ -1,0 +1,62 @@
+---
+title: "CarForSale Scraper"
+publishedAt: "2024-05-01"
+summary: "Scraper pour extraire des données de voitures à vendre sur un site web, avec stockage dans une base de données."
+images:
+  - "/images/projects/carforSale.png"
+team:
+  - name: "Salim Diallo"
+    role: "Python Developer & Data Engineer"
+    avatar: "/images/avatar.jpg"
+    linkedIn: "https://www.linkedin.com/in/salimdiallo/"
+---
+
+## Vue d'ensemble
+
+CarForSale Scraper est un outil automatisé d'extraction de données permettant de collecter et d'analyser les informations sur les véhicules à vendre. Ce projet combine web scraping, traitement de données et stockage structuré.
+
+## Objectifs du projet
+
+Développer une solution robuste pour collecter automatiquement des données de véhicules depuis des sites web, les nettoyer, et les stocker dans une base de données pour faciliter l'analyse et la comparaison.
+
+## Fonctionnalités principales
+
+- **Web Scraping intelligent** : Extraction automatisée des données de véhicules
+- **Gestion des pages dynamiques** : Utilisation de Selenium pour les contenus JavaScript
+- **Nettoyage des données** : Traitement et normalisation avec Pandas
+- **Stockage structuré** : Base de données SQLite pour persistance
+- **Analyse statistique** : Traitement des données avec NumPy
+- **Gestion des erreurs** : Système robuste de gestion d'exceptions
+
+## Technologies utilisées
+
+- **Python** : Langage principal pour l'automatisation
+- **BeautifulSoup** : Parsing HTML pour extraction de données
+- **Selenium** : Automation du navigateur pour contenu dynamique
+- **Requests** : Gestion des requêtes HTTP
+- **SQLite** : Base de données légère pour stockage
+- **Pandas** : Manipulation et analyse de données
+- **NumPy** : Calculs numériques et statistiques
+
+## Architecture
+
+Le scraper est organisé en plusieurs modules :
+- Module d'extraction avec gestion des erreurs
+- Pipeline de nettoyage et transformation des données
+- Système de stockage avec SQLite
+- Module d'analyse et export des résultats
+
+## Défis techniques
+
+- Contournement des protections anti-scraping
+- Gestion des changements de structure HTML
+- Optimisation des performances pour grandes quantités de données
+- Normalisation des données hétérogènes
+
+## Cas d'usage
+
+Ce scraper peut être utilisé pour :
+- Analyse de marché automobile
+- Comparaison de prix
+- Suivi des tendances
+- Aide à la décision d'achat

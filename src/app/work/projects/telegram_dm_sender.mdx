@@ -1,0 +1,87 @@
+---
+title: "Telegram DM Sender"
+publishedAt: "2024-01-01"
+summary: "Bot Telegram pour envoyer des messages en masse à des utilisateurs spécifiques, avec gestion des erreurs et des délais."
+images:
+  - "/images/projects/telegram.png"
+team:
+  - name: "Salim Diallo"
+    role: "Python Developer & Bot Engineer"
+    avatar: "/images/avatar.jpg"
+    linkedIn: "https://www.linkedin.com/in/salimdiallo/"
+---
+
+## Vue d'ensemble
+
+Telegram DM Sender est un bot automatisé permettant d'envoyer des messages personnalisés à plusieurs utilisateurs Telegram de manière efficace et sécurisée. Conçu avec des mécanismes de protection contre le spam et une gestion robuste des erreurs.
+
+## Objectifs du projet
+
+Créer un outil d'automatisation respectueux des limitations de l'API Telegram, permettant l'envoi de messages en masse tout en évitant les bannissements et en garantissant la délivrabilité.
+
+## Fonctionnalités principales
+
+- **Envoi de messages en masse** : Automatisation de l'envoi à plusieurs destinataires
+- **Personnalisation** : Messages adaptés pour chaque utilisateur
+- **Gestion des délais** : Respect des limites d'API avec délais intelligents
+- **Gestion des erreurs** : Détection et traitement des erreurs d'envoi
+- **Tracking** : Suivi des messages envoyés et des échecs
+- **Base de données** : Stockage des destinataires et historique
+- **Anti-spam** : Mécanismes pour éviter le bannissement
+
+## Technologies utilisées
+
+- **Python** : Langage principal pour l'automatisation
+- **Telethon** : Bibliothèque Python pour l'API Telegram
+- **SQLite** : Stockage local des données et historique
+
+## Architecture
+
+Le bot est structuré en plusieurs modules :
+- Module de connexion et authentification
+- Gestionnaire de liste de destinataires
+- Système de file d'attente pour l'envoi
+- Module de tracking et logging
+- Gestion des erreurs et retry logic
+
+## Fonctionnalités de sécurité
+
+- **Rate limiting** : Limitation du nombre de messages par période
+- **Délais variables** : Temps d'attente aléatoires entre messages
+- **Détection d'erreurs** : Identification des problèmes d'envoi
+- **Gestion des flood errors** : Pause automatique en cas de limite atteinte
+- **Logging complet** : Traçabilité de toutes les actions
+
+## Cas d'usage
+
+Le bot peut être utilisé pour :
+- Notifications à une communauté
+- Campagnes d'information
+- Rappels automatiques
+- Communication événementielle
+
+## Respect de l'API Telegram
+
+Le bot respecte scrupuleusement :
+- Les limites de taux d'envoi
+- Les règles anti-spam de Telegram
+- La vie privée des utilisateurs
+- Les bonnes pratiques de développement bot
+
+## Base de données
+
+SQLite stocke :
+- Liste des destinataires
+- Historique des envois
+- Statuts de livraison
+- Messages en file d'attente
+- Logs d'erreurs
+
+## Apprentissages techniques
+
+Ce projet m'a permis de maîtriser :
+- L'API Telegram et ses limitations
+- La gestion de files d'attente asynchrones
+- Le rate limiting et les retry strategies
+- La persistance de données avec SQLite
+- La gestion d'erreurs réseau

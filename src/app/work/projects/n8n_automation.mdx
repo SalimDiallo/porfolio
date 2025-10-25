@@ -1,0 +1,67 @@
+---
+title: "N8N Automation"
+publishedAt: "2024-12-01"
+summary: "Workflow automatisé qui envoie les e-mails étiquetés dans Gmail vers une base de données Notion."
+images:
+  - "/images/projects/n8n.png"
+team:
+  - name: "Salim Diallo"
+    role: "Automation Engineer"
+    avatar: "/images/avatar.jpg"
+    linkedIn: "https://www.linkedin.com/in/salimdiallo/"
+---
+
+## Vue d'ensemble
+
+Ce workflow N8N automatise la synchronisation entre Gmail et Notion, permettant de créer automatiquement des pages Notion à partir d'e-mails étiquetés dans Gmail. Une solution idéale pour organiser et archiver les e-mails importants.
+
+## Problématique
+
+Les professionnels reçoivent quotidiennement de nombreux e-mails importants qui nécessitent un suivi. Cette automatisation permet de centraliser ces informations dans Notion pour un meilleur suivi et une organisation optimale.
+
+## Fonctionnalités principales
+
+- **Détection automatique** : Surveillance des e-mails avec étiquettes spécifiques
+- **Extraction intelligente** : Récupération du sujet, contenu et métadonnées
+- **Création de pages Notion** : Génération automatique de pages structurées
+- **Lien vers l'e-mail** : Conservation du lien direct vers l'e-mail original
+- **Traitement des pièces jointes** : Gestion des fichiers joints
+- **Notifications** : Alertes en cas d'erreur
+
+## Technologies utilisées
+
+- **N8N** : Plateforme d'automatisation no-code/low-code
+- **Gmail API** : Accès aux e-mails et métadonnées
+- **Notion API** : Création et mise à jour de pages
+
+## Architecture du workflow
+
+Le workflow est composé de plusieurs nœuds :
+1. **Trigger Gmail** : Détection des nouveaux e-mails étiquetés
+2. **Extraction des données** : Parsing du sujet et du contenu
+3. **Transformation** : Formatage des données pour Notion
+4. **Création Notion** : Insertion dans la base de données
+5. **Gestion des erreurs** : Logging et notifications
+
+## Cas d'usage
+
+Cette automatisation est idéale pour :
+- **Suivi des projets** : Archiver les e-mails clients
+- **Veille** : Sauvegarder les newsletters importantes
+- **Documentation** : Conserver les e-mails techniques
+- **CRM** : Centraliser les communications clients
+
+## Avantages
+
+- **Gain de temps** : Automatisation complète du processus
+- **Organisation** : Centralisation dans Notion
+- **Traçabilité** : Conservation des liens originaux
+- **Personnalisable** : Workflow adaptable aux besoins
+
+## Personnalisation
+
+Le workflow peut être étendu pour :
+- Ajouter des tags automatiques
+- Extraire des informations spécifiques
+- Déclencher d'autres actions
+- S'intégrer avec d'autres outils
