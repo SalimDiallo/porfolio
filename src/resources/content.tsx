@@ -79,7 +79,7 @@ const about: About = {
   },
   calendar: {
     display: true,
-    link: "https://cal.com",
+    link: "https://cal.com/sidy-mohamed-salim-diallo-nkvfem/30min?overlayCalendar=true",
   },
   intro: {
     display: true,
