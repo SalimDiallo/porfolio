@@ -21,6 +21,7 @@ import { Metadata } from "next";
 import React from "react";
 import { Posts } from "@/components/blog/Posts";
 import { ShareSection } from "@/components/blog/ShareSection";
+import {RAGDiagram} from "../posts/RAGDiagram"
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = getPosts(["src", "app", "blog", "posts"]);
@@ -124,7 +125,8 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
             />
           )}
           <Column as="article" maxWidth="s">
-            <CustomMDX source={post.content} />
+            <CustomMDX source={post.content}
+            />
           </Column>
           
           <ShareSection 
