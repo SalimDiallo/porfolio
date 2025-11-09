@@ -37,24 +37,26 @@ const protectedRoutes: ProtectedRoutesConfig = {
 };
 
 // Import and set font for each variant
-import { Geist } from "next/font/google";
+import { Lato, MuseoModerno } from "next/font/google";
 import { Geist_Mono } from "next/font/google";
 
-const heading = Geist({
+const heading = MuseoModerno({
   variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
 });
 
-const body = Geist({
+const body = Lato({
   variable: "--font-body",
   subsets: ["latin"],
+  weight: ["400", "700"],
   display: "swap",
 });
 
-const label = Geist({
+const label = Lato({
   variable: "--font-label",
   subsets: ["latin"],
+  weight: ["400", "700"],
   display: "swap",
 });
 
