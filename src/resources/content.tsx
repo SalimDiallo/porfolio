@@ -42,7 +42,7 @@ const home: Home = {
   label: "Accueil",
   title: `Portfolio de ${person.name}`,
   description: `Site portfolio présentant mon travail en tant que ${person.role}`,
-  headline: <>Construire des solutions innovantes grâce à la data, l'IA et le software engineering</>,
+  headline: <>Data IA et Software Engineering</>,
   featured: {
     display: true,
     title: (
@@ -58,9 +58,29 @@ const home: Home = {
   },
   subline: (
     <>
-      Je suis Salim Diallo, Data et Software Engineer spécialisé dans les applications web modernes,
-      <br /> le data engineering, et des solutions boostées par l'IA. Je réalise actuellement des projets innovants
-      <br /> qui relient technologie et besoins réels des entreprises.
+      Je suis Salim Diallo, Etudiant en Data et Software Engineering 
+      <br /> spécialisé dans la data et l'IA. 
+    <br />
+    <Row horizontal="center" marginY="8">
+      <Text
+        as="blockquote"
+        variant="heading-default-m"
+        style={{
+          fontStyle: "italic",
+          background: "rgba(36, 180, 255, 0.06)",
+          borderLeft: "4px solid #24b4ff",
+          padding: "10px 16px",
+          borderRadius: "8px",
+          color: "#146e94",
+          maxWidth: 520,
+        }}
+      >
+        <span style={{ opacity: 0.75 }}>
+          "The best way to predict the future is to invent it."
+        </span>
+      </Text>
+    </Row>
+    <br />
     </>
   ),
 };

@@ -189,7 +189,6 @@ const components = {
   Heading,
   Text,
   CodeBlock,
-  RAGDiagram,
   InlineCode,
   Accordion,
   AccordionGroup,
