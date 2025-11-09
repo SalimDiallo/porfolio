@@ -13,7 +13,7 @@ const person: Person = {
 };
 
 const newsletter: Newsletter = {
-  display: true,
+  display: false,
   title: <>Abonnez-vous à la newsletter de {person.firstName}</>,
   description: <>Retours d'expérience en software engineering, data science et développement moderne</>,
 };
