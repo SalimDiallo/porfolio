@@ -1,4 +1,4 @@
-import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
+import type { About, Blog, Gallery, Home, Newsletter, Person, Social, Work, Videos } from "@/types";
 import { Line, Logo, Row, Text } from "@once-ui-system/core";
 
 const person: Person = {
@@ -15,7 +15,9 @@ const person: Person = {
 const newsletter: Newsletter = {
   display: false,
   title: <>Abonnez-vous à la newsletter de {person.firstName}</>,
-  description: <>Retours d'expérience en software engineering, data science et développement moderne</>,
+  description: (
+    <>Retours d'expérience en software engineering, data science et développement moderne</>
+  ),
 };
 
 const social: Social = [
@@ -58,29 +60,29 @@ const home: Home = {
   },
   subline: (
     <>
-      Je suis Salim Diallo, Etudiant en Data et Software Engineering 
-      <br /> spécialisé dans la data et l'IA. 
-    <br />
-    <Row horizontal="center" marginY="8">
-      <Text
-        as="blockquote"
-        variant="heading-default-m"
-        style={{
-          fontStyle: "italic",
-          background: "rgba(36, 180, 255, 0.06)",
-          borderLeft: "4px solid #24b4ff",
-          padding: "10px 16px",
-          borderRadius: "8px",
-          color: "#146e94",
-          maxWidth: 520,
-        }}
-      >
-        <span style={{ opacity: 0.75 }}>
-          "The best way to predict the future is to invent it."
-        </span>
-      </Text>
-    </Row>
-    <br />
+      Je suis Salim Diallo, Etudiant en Data et Software Engineering
+      <br /> spécialisé dans la data et l'IA.
+      <br />
+      <Row horizontal="center" marginY="8">
+        <Text
+          as="blockquote"
+          variant="heading-default-m"
+          style={{
+            fontStyle: "italic",
+            background: "rgba(36, 180, 255, 0.06)",
+            borderLeft: "4px solid #24b4ff",
+            padding: "10px 16px",
+            borderRadius: "8px",
+            color: "#146e94",
+            maxWidth: 520,
+          }}
+        >
+          <span style={{ opacity: 0.75 }}>
+            "The best way to predict the future is to invent it."
+          </span>
+        </Text>
+      </Row>
+      <br />
     </>
   ),
 };
@@ -106,7 +108,10 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        Salim est un Data et Software Engineer basé à Rabat, passionné par la création d'applications modernes et performantes. Formé à l'Institut National de Statistique et d'Économie Appliquée (INSEA) et fort d'une expérience au Haut Commissariat au Plan, il se spécialise dans le full-stack development, le data engineering et les solutions IA.
+        Salim est un Data et Software Engineer basé à Rabat, passionné par la création
+        d'applications modernes et performantes. Formé à l'Institut National de Statistique et
+        d'Économie Appliquée (INSEA) et fort d'une expérience au Haut Commissariat au Plan, il se
+        spécialise dans le full-stack development, le data engineering et les solutions IA.
       </>
     ),
   },
@@ -120,10 +125,12 @@ const about: About = {
         role: "Data, IA et Full-Stack Developer",
         achievements: [
           <>
-            Réalisation de solutions web sur mesure pour divers clients, dont des agences de voyage et des systèmes de gestion d'entreprise.
+            Réalisation de solutions web sur mesure pour divers clients, dont des agences de voyage
+            et des systèmes de gestion d'entreprise.
           </>,
           <>
-            Développement d'applications IA pour l'extraction automatisée de données et l'assistance intelligente aux études, comprenant le scraping et le nettoyage de données.
+            Développement d'applications IA pour l'extraction automatisée de données et l'assistance
+            intelligente aux études, comprenant le scraping et le nettoyage de données.
           </>,
         ],
         images: [],
@@ -134,13 +141,16 @@ const about: About = {
         role: "Problem Solving Contestant",
         achievements: [
           <>
-            Participation au concours national de programmation, résolution de problèmes algorithmiques et informatiques complexes sous contraintes de temps.
+            Participation au concours national de programmation, résolution de problèmes
+            algorithmiques et informatiques complexes sous contraintes de temps.
           </>,
           <>
-            Renforcement des compétences en travail d'équipe, communication et pensée critique à travers la résolution collaborative et en temps réel de problèmes.
+            Renforcement des compétences en travail d'équipe, communication et pensée critique à
+            travers la résolution collaborative et en temps réel de problèmes.
           </>,
           <>
-            Acquisition d'une expérience pratique des stratégies de competitive programming et des dernières techniques de résolution de problèmes.
+            Acquisition d'une expérience pratique des stratégies de competitive programming et des
+            dernières techniques de résolution de problèmes.
           </>,
         ],
         images: [],
@@ -151,11 +161,13 @@ const about: About = {
         role: "Stage de découverte du monde professionnel",
         achievements: [
           <>
-            Découverte des rouages d'une administration centrale à travers l'observation et la participation à des missions au Haut Commissariat au Plan.
+            Découverte des rouages d'une administration centrale à travers l'observation et la
+            participation à des missions au Haut Commissariat au Plan.
           </>,
           <>
-            Première expérience avec des outils statistiques, des technologies de l'information et des processus de gestion des données au sein de l'organisation.
-          </>
+            Première expérience avec des outils statistiques, des technologies de l'information et
+            des processus de gestion des données au sein de l'organisation.
+          </>,
         ],
         images: [],
       },
@@ -167,11 +179,21 @@ const about: About = {
     institutions: [
       {
         name: "Institut National de Statistique et d'Économie Appliquée (INSEA)",
-        description: <>Spécialisation en Data et Software Engineering, axée sur les pratiques de développement moderne et la data science.</>,
+        description: (
+          <>
+            Spécialisation en Data et Software Engineering, axée sur les pratiques de développement
+            moderne et la data science.
+          </>
+        ),
       },
       {
         name: "Formation continue",
-        description: <>Auto-apprentissage de l'IA (RAG, fine-tuning, LLMs), automatisation avec n8n, et travail avec des frameworks tels que Django et Next.js.</>,
+        description: (
+          <>
+            Auto-apprentissage de l'IA (RAG, fine-tuning, LLMs), automatisation avec n8n, et travail
+            avec des frameworks tels que Django et Next.js.
+          </>
+        ),
       },
     ],
   },
@@ -182,7 +204,10 @@ const about: About = {
       {
         title: "Full-Stack Development",
         description: (
-          <>Construction d'applications web modernes avec Django, Next.js, TypeScript et Tailwind CSS</>
+          <>
+            Construction d'applications web modernes avec Django, Next.js, TypeScript et Tailwind
+            CSS
+          </>
         ),
         tags: [
           {
@@ -206,7 +231,11 @@ const about: About = {
       {
         title: "Data Engineering & AI",
         description: (
-          <>Travail en Python, scraping de data, pipelines ETL et conception d'applications IA utilisant le fine-tuning, le Retrieval-Augmented Generation (RAG), le Model Context Protocol (MCP), et plus.</>
+          <>
+            Travail en Python, scraping de data, pipelines ETL et conception d'applications IA
+            utilisant le fine-tuning, le Retrieval-Augmented Generation (RAG), le Model Context
+            Protocol (MCP), et plus.
+          </>
         ),
         tags: [
           {
@@ -244,7 +273,10 @@ const about: About = {
       {
         title: "Automatisation & Intégration",
         description: (
-          <>Création de workflows automatisés dans N8N avec l'API Notion, intégration Gmail et bots Telegram.</>
+          <>
+            Création de workflows automatisés dans N8N avec l'API Notion, intégration Gmail et bots
+            Telegram.
+          </>
         ),
         tags: [
           {
@@ -334,4 +366,31 @@ const gallery: Gallery = {
   ],
 };
 
-export { person, social, newsletter, home, about, blog, work, gallery };
+const videos: Videos = {
+  path: "/videos",
+  label: "Vidéos",
+  title: `Vidéos YouTube – ${person.name}`,
+  description: `Collection de vidéos YouTube par ${person.name}`,
+  videos: [
+    {
+      title: "INSEA’s ‘Game of Codes’ to Foster AI Innovation and Coding Excellence",
+      description: "",
+      url: "https://youtu.be/L-F5F05l4ps?si=V-A7WEuMScbwqhcp",
+    },
+    {
+      title: "Video de presentation du projet MOO",
+      description: "",
+      url: "https://youtu.be/nHS6NYS2_hk?si=J6yiVsLzBd7kl_Kl",
+    },
+    {
+      title:
+        "Un parcours inspirant : comment il s’est hissé jusqu’à Gitex grâce à la tech et l’automatisation",
+      description: "",
+      url: "https://youtu.be/qNPdUfyEDdQ?si=KwvnXlzgTgm7SiFV",
+    },
+
+    // Ajoutez vos vidéos YouTube ici
+  ],
+};
+
+export { person, social, newsletter, home, about, blog, work, gallery, videos };

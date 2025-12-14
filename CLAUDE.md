@@ -97,7 +97,7 @@ The entire site is configured through two main files in `src/resources/`:
    - `display`: Show/hide location, time, theme switcher
    - `style`: Theme, colors, borders, transitions, scaling
    - `effects`: Background gradients, dots, grids, masks
-   - `fonts`: Typography (Geist and Geist Mono)
+   - `fonts`: Typography (MuseoModerno for headings, Lato for body/labels, Geist Mono for code)
 
 2. **content.tsx**: Defines all site content
    - `person`: Personal info, avatar, email, location

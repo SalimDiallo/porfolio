@@ -236,3 +236,21 @@ export interface Gallery extends BasePageConfig {
     orientation: string;
   }>;
 }
+
+/**
+ * Videos page configuration.
+ * @description Configuration for the Videos page, including metadata, navigation label, and YouTube video list.
+ */
+export interface Videos extends BasePageConfig {
+  /** List of YouTube videos */
+  videos: Array<{
+    /** Video title */
+    title: string;
+    /** Video description */
+    description: string;
+    /** YouTube video URL */
+    url: string;
+    /** Thumbnail image (optional, will use YouTube thumbnail if not provided) */
+    thumbnail?: string;
+  }>;
+}

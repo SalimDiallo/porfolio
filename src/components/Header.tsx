@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import { Fade, Flex, Line, Row, ToggleButton } from "@once-ui-system/core";
 
-import { routes, display, person, about, blog, work, gallery } from "@/resources";
+import { routes, display, person, about, blog, work, gallery, videos } from "@/resources";
 import { ThemeToggle } from "./ThemeToggle";
 import styles from "./Header.module.scss";
 
@@ -40,7 +40,6 @@ type TimeDisplayProps = {
 //   return <>{currentTime}</>;
 // };
 
-
 // export default TimeDisplay;
 
 export const Header = () => {
@@ -74,7 +73,7 @@ export const Header = () => {
         }}
       >
         {/* <Row paddingLeft="12" fillWidth vertical="center" textVariant="body-default-s"> */}
-          {/* {display.location && <Row s={{ hide: true }}>{person.location}</Row>} */}
+        {/* {display.location && <Row s={{ hide: true }}>{person.location}</Row>} */}
         {/* </Row> */}
         <Row fillWidth horizontal="center">
           <Row
@@ -148,6 +147,25 @@ export const Header = () => {
                   </Row>
                 </>
               )}
+              {routes["/videos"] && (
+                <>
+                  <Row s={{ hide: true }}>
+                    <ToggleButton
+                      prefixIcon="video"
+                      href="/videos"
+                      label={videos.label}
+                      selected={pathname.startsWith("/videos")}
+                    />
+                  </Row>
+                  <Row hide s={{ hide: false }}>
+                    <ToggleButton
+                      prefixIcon="video"
+                      href="/videos"
+                      selected={pathname.startsWith("/videos")}
+                    />
+                  </Row>
+                </>
+              )}
               {routes["/gallery"] && (
                 <>
                   <Row s={{ hide: true }}>
@@ -185,8 +203,8 @@ export const Header = () => {
             gap="20"
           >
             <Flex s={{ hide: true }}> */}
-              {/* {display.time && <TimeDisplay timeZone={person.location} />} */}
-            {/* </Flex>
+        {/* {display.time && <TimeDisplay timeZone={person.location} />} */}
+        {/* </Flex>
           </Flex> */}
         {/* </Flex> */}
       </Row>
