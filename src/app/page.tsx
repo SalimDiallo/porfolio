@@ -12,7 +12,7 @@ import {
 } from "@once-ui-system/core";
 import { home, about, person, baseURL, routes } from "@/resources";
 import { Mailchimp, Terminal } from "@/components";
-import { Projects } from "@/components/work/Projects";
+import { ProjectsServer } from "@/components/work/ProjectsServer";
 import { Posts } from "@/components/blog/Posts";
 
 export async function generateMetadata() {
@@ -126,7 +126,7 @@ export default function Home() {
               Voir tous les projets
             </Button>
           </Row>
-          <Projects range={[1, 4]} />
+          <ProjectsServer range={[1, 4]} />
         </Column>
       </RevealFx>
 
