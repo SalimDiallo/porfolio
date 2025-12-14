@@ -31,6 +31,7 @@ function getYouTubeVideoId(url: string): string | null {
 
 export default function VideoCard({ video }: VideoCardProps) {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [currentThumbnailIndex, setCurrentThumbnailIndex] = useState(0);
   const videoId = getYouTubeVideoId(video.url);
 
   if (!videoId) {
@@ -46,8 +47,27 @@ export default function VideoCard({ video }: VideoCardProps) {
     );
   }
 
-  const thumbnailUrl = video.thumbnail || `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
   const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+
+  // Liste des URLs de thumbnail par ordre de préférence (du meilleur au moins bon)
+  const thumbnailUrls = video.thumbnail
+    ? [video.thumbnail]
+    : [
+        `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+        `https://img.youtube.com/vi/${videoId}/sddefault.jpg`,
+        `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+        `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
+        `https://img.youtube.com/vi/${videoId}/default.jpg`,
+      ];
+
+  const thumbnailUrl = thumbnailUrls[currentThumbnailIndex];
+
+  // Gérer l'erreur de chargement en essayant la prochaine résolution
+  const handleImageError = () => {
+    if (currentThumbnailIndex < thumbnailUrls.length - 1) {
+      setCurrentThumbnailIndex(currentThumbnailIndex + 1);
+    }
+  };
 
   return (
     <Card
@@ -84,6 +104,7 @@ export default function VideoCard({ video }: VideoCardProps) {
                 objectFit: "cover",
               }}
               onClick={() => setIsLoaded(true)}
+              onError={handleImageError}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   setIsLoaded(true);
