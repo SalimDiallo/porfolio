@@ -1,4 +1,4 @@
-import type { About, Blog, Gallery, Home, Newsletter, Person, Social, Work, Videos } from "@/types";
+import type { About, Blog, Docs, Gallery, Home, Newsletter, Person, Social, Work, Videos } from "@/types";
 import { Line, Logo, Row, Text } from "@once-ui-system/core";
 
 const person: Person = {
@@ -393,4 +393,32 @@ const videos: Videos = {
   ],
 };
 
-export { person, social, newsletter, home, about, blog, work, gallery, videos };
+const docs: Docs = {
+  path: "/docs",
+  label: "Documents",
+  title: `Rapports de Projets – ${person.name}`,
+  description: `Collection de rapports et documents de projets par ${person.name}`,
+  documents: [
+    // Ajoutez vos documents PDF ici
+    // Exemple :
+    {
+      title: "Analyseur de Grammaires Régulières",
+      description: "Technique de traitement des langages naturels et Compilateurs",
+      category: "Analyseur de Grammaires Régulières",
+      file: "/docs/Compilation.pdf",
+      date: "Juillet 2025",
+      tags: ["Compilation", "Projets"],
+    },
+    {
+      title: "Retro ingénierie de Watiqa.ma",
+      description: "Modelisation Orientée Objet",
+      category: "Retro ingénierie de Watiqa.ma",
+      file: "/docs/ProjetMOO_final.pdf",
+      date: "Juillet 2025",
+      tags: ["MOO", "Projets"],
+    },
+  
+  ],
+};
+
+export { person, social, newsletter, home, about, blog, work, gallery, videos, docs };

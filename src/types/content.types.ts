@@ -254,3 +254,27 @@ export interface Videos extends BasePageConfig {
     thumbnail?: string;
   }>;
 }
+
+/**
+ * Documentation page configuration.
+ * @description Configuration for the Docs page, listing project reports and documents as viewable PDFs.
+ */
+export interface Docs extends BasePageConfig {
+  /** List of PDF documents */
+  documents: Array<{
+    /** Document title */
+    title: string;
+    /** Document description */
+    description: string;
+    /** Category of the document (e.g., 'rapport', 'mémoire', 'présentation') */
+    category: string;
+    /** Path to the PDF file in public/docs/ */
+    file: string;
+    /** Cover image path (optional) */
+    cover?: string;
+    /** Date of the document (optional) */
+    date?: string;
+    /** Tags for filtering (optional) */
+    tags?: string[];
+  }>;
+}
