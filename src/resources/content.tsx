@@ -384,7 +384,7 @@ const videos: Videos = {
     },
     {
       title:
-      "Projet d'analyseur de grammaire reguliere",
+      "Projet d'analyseur de grammaire reguliere en technique de compilation",
     description: "",
     url: "https://youtu.be/rKRsC-Jb8_k?si=1no4cOwx2lkdpJ2w",
     },
