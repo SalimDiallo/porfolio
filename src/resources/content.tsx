@@ -384,12 +384,16 @@ const videos: Videos = {
     },
     {
       title:
+      "Projet d'analyseur de grammaire reguliere",
+    description: "",
+    url: "https://youtu.be/rKRsC-Jb8_k?si=1no4cOwx2lkdpJ2w",
+    },
+    {
+      title:
         "Un parcours inspirant : comment il s’est hissé jusqu’à Gitex grâce à la tech et l’automatisation",
       description: "",
       url: "https://youtu.be/qNPdUfyEDdQ?si=KwvnXlzgTgm7SiFV",
-    },
-
-    // Ajoutez vos vidéos YouTube ici
+    }
   ],
 };
 
