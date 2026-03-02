@@ -49,10 +49,11 @@ const home: Home = {
     display: true,
     title: (
       <Row gap="12" vertical="center">
-        <strong className="ml-4">Projet à la une</strong>{" "}
+        <span className="status-dot" />
+        <strong>Disponible pour des projets</strong>{" "}
         <Line background="brand-alpha-strong" vert height="20" />
         <Text marginRight="4" onBackground="brand-medium">
-          Réalisations récentes
+          Freelance & Collaboration
         </Text>
       </Row>
     ),
@@ -60,29 +61,9 @@ const home: Home = {
   },
   subline: (
     <>
-      Je suis Salim Diallo, Etudiant en Data et Software Engineering
-      <br /> spécialisé dans la data et l'IA.
-      <br />
-      <Row horizontal="center" marginY="8">
-        <Text
-          as="blockquote"
-          variant="heading-default-m"
-          style={{
-            fontStyle: "italic",
-            background: "rgba(36, 180, 255, 0.06)",
-            borderLeft: "4px solid #24b4ff",
-            padding: "10px 16px",
-            borderRadius: "8px",
-            color: "#146e94",
-            maxWidth: 520,
-          }}
-        >
-          <span style={{ opacity: 0.75 }}>
-            "The best way to predict the future is to invent it."
-          </span>
-        </Text>
-      </Row>
-      <br />
+      Je suis <strong>Salim Diallo</strong>, étudiant ingénieur passionné par la
+      création de solutions intelligentes — du développement full-stack aux
+      pipelines de données et systèmes d'IA.
     </>
   ),
 };

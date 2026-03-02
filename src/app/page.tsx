@@ -48,7 +48,6 @@ export default function Home() {
         paddingBottom="xl"
         horizontal="center"
         align="center"
-        maxWidth="m"
         style={{
           display: "flex",
           alignItems: "center",
@@ -78,7 +77,7 @@ export default function Home() {
           </Heading>
         </RevealFx>
 
-        <RevealFx translateY="8" delay={0.2} fillWidth horizontal="center">
+        <RevealFx translateY="8" delay={0.2} fillWidth horizontal="center" >   
           <Text wrap="balance" onBackground="neutral-weak" variant="body-default-l" align="center">
             {home.subline}
           </Text>
